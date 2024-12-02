@@ -16,8 +16,34 @@ public class App {
             String choice = reader.readLine();
             
 
+            //ユーザーに1か2を選択してもらう
+            //1を選択した場合、CSVインスタンを生成
+            //2を選択した場合、JSONインスタンスを生成
+            //不正な入力の場合、CSVインスタンスを生成
+            DataHandler dataHandler;
+            switch (Integer.parseInt(choice)) {
+                case 1:
+                dataHandler = new CSVDataHandler();
+                break;
+                case 2:
+                dataHandler = new JSONDataHandler();
+                break;
+                default:
+                dataHandler = new CSVDataHandler();
+                break;
+            }
+
+            //MainMenuにデータを渡す
+            mainMenu(dataHandler);
         } catch (Exception e) {
             System.err.println("Error: " + e.getMessage());
         }
     }
+
+    //RecipeUIにデータを渡すメソッド
+    public static void mainMenu(DataHandler dataHandler) {
+        RecipeUI recipeMenu = new RecipeUI(dataHandler);
+        recipeMenu.displayMenu();
+    }
 }
+//解答
