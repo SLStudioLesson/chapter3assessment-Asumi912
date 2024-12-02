@@ -36,8 +36,10 @@ public class RecipeUI {
 
                 switch (choice) {
                     case "1":
+                        displayRecipes();
                         break;
                     case "2":
+                        addNewRecipe();
                         break;
                     case "3":
                         break;
@@ -70,7 +72,7 @@ public class RecipeUI {
             // レシピ名
             System.out.println("Recipe Name: " + recipe.getName());
             // 具材名
-            System.out.println("Main Ingredients: ");
+            System.out.print("Main Ingredients: ");
             ArrayList<Ingredient> ingredients = recipe.getIngredients();
             for (int i = 0; i < ingredients.size(); i++) {
                 System.out.println(ingredients.get(i).getName());
@@ -111,6 +113,7 @@ public class RecipeUI {
 
             // dataHandlerのwritedataメソッドにRecipeインスタンスを渡す
             dataHandler.writeData(newRecipe);
+
         } catch (IOException e) {
             // IOExceptionを受け取った場合はFailed to add new recipe:例外のメッセージとコンソールに表示
             System.out.println(e.getMessage());

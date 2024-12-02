@@ -26,7 +26,7 @@ public class CSVDataHandler implements DataHandler {
     }
 
     public ArrayList<Recipe> readData() throws IOException {
-        ArrayList<String> recipes = new ArrayList<>();
+        ArrayList<Recipe> recipes = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(filepath))) {
             // レシピ名と具材
             String line;
@@ -53,29 +53,43 @@ public class CSVDataHandler implements DataHandler {
         return recipes;
     }
 
-    public void writeData(Recipe recipe) throws IOException{
-        //ファイルにアクセス
-        try (PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(filepath, true)))) {
-            //レシピ名と具材の結合結果
-            String ingredientResult = recipe.getName();
+    public void writeData(Recipe recipe) throws IOException {
+        // ファイルにアクセス
+        // try (PrintWriter out = new PrintWriter(new BufferedWriter(new
+        // FileWriter(filepath, true)))) {
 
-            //受け取ったレシピをカンマでつなぐ
+        // ファイルに書き込む
+        // print.println(ingredientsResult);
+
+        // ファイルの書き込み
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filepath))) {
+            ArrayList<Recipe> recipes = readData();
+            for (Recipe r : recipes) {
+                String str = r.getName();
+                for (Ingredient ingredient : r.getIngredients() ) {
+                    str += "," + ingredient.getName();
+                }
+                writer.write(str);
+            }
+            // レシピ名と具材の結合結果
+            String ingredientsResult = recipe.getName();
+
+            // 受け取ったレシピをカンマでつなぐ
             ArrayList<Ingredient> recipeIngredients = recipe.getIngredients();
-            for(int i = 0; i < recipeIngredients.size(); i++) {
-                ingredientResult += "," + recipeIngredients.get(i).getName();
-            }    
-            
-            //ファイルに書き込む
-            //print.println(ingredientResult);
+            for (int i = 0; i < recipeIngredients.size(); i++) {
+                ingredientsResult += "," + recipeIngredients.get(i).getName();
+            }
+            writer.write(ingredientsResult);
             System.out.println("Recipe added successfully.");
+
         } catch (IOException e) {
             System.out.println("Failed to add new recipe: " + e.getMessage());
         }
-
     }
 
     public ArrayList<Recipe> searchData(String keyword) throws IOException {
         return null;
     }
 }
-//解答
+
+// 解答

@@ -32,9 +32,10 @@ public class App {
                 dataHandler = new CSVDataHandler();
                 break;
             }
-
+            RecipeUI recipeMenu = new RecipeUI(dataHandler);
+            recipeMenu.displayMenu();
             //MainMenuにデータを渡す
-            mainMenu(dataHandler);
+            // mainMenu(dataHandler);
         } catch (Exception e) {
             System.err.println("Error: " + e.getMessage());
         }
