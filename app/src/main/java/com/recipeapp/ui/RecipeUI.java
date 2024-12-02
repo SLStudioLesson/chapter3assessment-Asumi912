@@ -75,7 +75,10 @@ public class RecipeUI {
             System.out.print("Main Ingredients: ");
             ArrayList<Ingredient> ingredients = recipe.getIngredients();
             for (int i = 0; i < ingredients.size(); i++) {
-                System.out.println(ingredients.get(i).getName());
+                System.out.print(ingredients.get(i).getName());
+                if (i < ingredients.size() - 1) {
+                System.out.print(", ");
+                }
             }
             System.out.println();
             System.out.println("-----------------------------------");

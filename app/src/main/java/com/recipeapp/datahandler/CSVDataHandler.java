@@ -60,16 +60,17 @@ public class CSVDataHandler implements DataHandler {
 
         // ファイルに書き込む
         // print.println(ingredientsResult);
-
+        
+        ArrayList<Recipe> recipes = readData();
         // ファイルの書き込み
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filepath))) {
-            ArrayList<Recipe> recipes = readData();
             for (Recipe r : recipes) {
                 String str = r.getName();
                 for (Ingredient ingredient : r.getIngredients() ) {
                     str += "," + ingredient.getName();
                 }
                 writer.write(str);
+                writer.write("\n");
             }
             // レシピ名と具材の結合結果
             String ingredientsResult = recipe.getName();
